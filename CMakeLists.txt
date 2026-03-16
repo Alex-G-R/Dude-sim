@@ -51,6 +51,8 @@ add_executable(FRSGUI main.cpp
         FRSGUI/source/GUI/UIElement_derived/TextBlock.h
         FRSGUI/source/GUI/uielement_derived/Checkbox.h
         FRSGUI/source/GUI/uielement_derived/Checkbox.cpp
+        src/Game.cpp
+        src/Game.h
 
 )
 
