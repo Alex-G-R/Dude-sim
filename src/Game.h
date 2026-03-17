@@ -10,10 +10,13 @@ public:
         int W_WIDTH;
         int W_HEIGHT;
 
-        void styleSheet(fr::FRSGUI& FRSGUI);
+        void start(fr::FRSGUI& FRSGUI);
 
-        void startScene(fr::FRSGUI &FRSGUI);
-        void gameScene(fr::FRSGUI &FRSGUI);
+        void styleSheet(fr::FRSGUI& FRSGUI);
+        void createStartScene(fr::FRSGUI& FRSGUI);
+
+        void showStartScene(fr::FRSGUI &FRSGUI);
+        void hideStartScene(fr::FRSGUI &FRSGUI);
 
 
         ~Game();

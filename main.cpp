@@ -12,9 +12,9 @@ int main()
         "Dude-sim | Alex Grabski"
         );
     fr::FRSGUI FRSGUI(WINDOW);
-    Game Game(W_WIDTH, W_HEIGHT, FRSGUI);
 
-    Game.startScene(FRSGUI);
+    Game Game(W_WIDTH, W_HEIGHT, FRSGUI);
+    Game.start(FRSGUI);
 
     /* SFML render loop */
     while (WINDOW->isOpen())

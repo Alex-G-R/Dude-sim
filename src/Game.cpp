@@ -10,6 +10,12 @@ Game::Game(int w_width, int w_height, fr::FRSGUI& FRSGUI)
     styleSheet(FRSGUI);
 }
 
+void Game::start(fr::FRSGUI& FRSGUI)
+{
+    createStartScene(FRSGUI);
+    showStartScene(FRSGUI);
+}
+
 void Game::styleSheet(fr::FRSGUI &FRSGUI)
 {
     // off_scene
@@ -38,36 +44,43 @@ void Game::styleSheet(fr::FRSGUI &FRSGUI)
     }, FRSGUI);
 }
 
-
-void Game::startScene(fr::FRSGUI &FRSGUI)
+void Game::createStartScene(fr::FRSGUI &FRSGUI)
 {
     // Welcome text
     const auto banner = fr::UIElement::Builder(&FRSGUI)
     .setID("banner")
-    .addGroups({"banner_main", "scene_one"})
+    .addGroups({"banner_main", "scene_one", "off_scene"})
     .setText("Dude-sim")
     .buildUIElement();
 
     // start button
     const auto start_game_btn = fr::Button::Builder(&FRSGUI)
     .setID("start_game_btn")
-    .addGroup("button_main")
+    .addGroups({"button_main", "off_scene"})
     .setText("Start Game")
     .buildButton();
 
     // button functionality
-    start_game_btn->setOnClick([&FRSGUI]()
+    start_game_btn->setOnClick([&FRSGUI, this]()
     {
         std::cout << "Start Game" << std::endl;
-        FRSGUI.getButtonByID("start_game_btn")->addGroup("off_scene");
-
+        hideStartScene(FRSGUI);
     });
 }
 
-void Game::gameScene(fr::FRSGUI &FRSGUI)
-{
 
+void Game::showStartScene(fr::FRSGUI &FRSGUI)
+{
+    FRSGUI.getUIElementByID("banner")->deleteGroup("off_scene");
+    FRSGUI.getButtonByID("start_game_btn")->deleteGroup("off_scene");
 }
+
+void Game::hideStartScene(fr::FRSGUI &FRSGUI)
+{
+    FRSGUI.getUIElementByID("banner")->addGroup("off_scene");
+    FRSGUI.getButtonByID("start_game_btn")->addGroup("off_scene");
+}
+
 
 Game::~Game() = default;
 
