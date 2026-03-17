@@ -29,7 +29,7 @@ int main()
             }
             FRSGUI.dispatchEvent(event);
         }
-        WINDOW->clear();
+        WINDOW->clear(sf::Color::White);
 
         /* rendering */
 

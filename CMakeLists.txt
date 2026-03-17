@@ -53,6 +53,8 @@ add_executable(Dude-sim main.cpp
         FRSGUI/source/GUI/uielement_derived/Checkbox.cpp
         src/Game.cpp
         src/Game.h
+        src/Player.cpp
+        src/Player.h
 
 )
 
