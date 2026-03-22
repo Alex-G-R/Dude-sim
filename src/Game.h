@@ -24,6 +24,9 @@ public:
         void showCharacterCreationScene(fr::FRSGUI &FRSGUI);
         void hideCharacterCreationScene(fr::FRSGUI &FRSGUI);
 
+        void createGameScene(fr::FRSGUI &FRSGUI);
+        void showGameScene(fr::FRSGUI &FRSGUI);
+
 
         ~Game();
 

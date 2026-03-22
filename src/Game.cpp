@@ -41,7 +41,7 @@ void Game::styleSheet(fr::FRSGUI &FRSGUI)
     // banner_main
     auto banner_main_style = Style("banner_main", fr::ApplyBy::GROUP, 1, {
         {fr::KEY::POSITION, sf::Vector2f(0.f , 0.f)},
-        {fr::KEY::SIZE, sf::Vector2f(W_WIDTH, W_HEIGHT/12)},
+        {fr::KEY::SIZE, sf::Vector2f(W_WIDTH, 50.f)},
         {fr::KEY::BACKGROUND_COLOR, sf::Color{255, 255, 255, 255}},
         {fr::KEY::CHARACTER_SIZE, 36},
         {fr::KEY::TEXT_COLOR, sf::Color::Black}
@@ -70,7 +70,51 @@ void Game::styleSheet(fr::FRSGUI &FRSGUI)
         {fr::KEY::OUTLINE_THICKNESS, 2.f},
         {fr::KEY::CHARACTER_SIZE, 18},
     }, FRSGUI);
+
+    // game_data_block_main
+    auto game_data_block_style = Style("game_data_block_main", fr::ApplyBy::GROUP, 1, {
+        {fr::KEY::POSITION, sf::Vector2f(20.f, 70.f)},
+        {fr::KEY::BACKGROUND_COLOR, sf::Color::Black},
+        {fr::KEY::SIZE, sf::Vector2f(280.f, 510.f)},
+    }, FRSGUI);
+
+    // game_data_data_main
+    auto game_data_data_main_style = Style("game_data_data_main", fr::ApplyBy::GROUP, 1, {
+        {fr::KEY::TEXT_COLOR, sf::Color::White},
+        {fr::KEY::CHARACTER_SIZE, 22},
+        {fr::KEY::BACKGROUND_COLOR, sf::Color::Black},
+        {fr::KEY::CENTER_TEXT_HORIZONTALLY, false},
+    }, FRSGUI);
+
+    // ID | game_data_player_name
+    auto game_data_player_name = Style("game_data_player_name", fr::ApplyBy::ID, 1, {
+        {fr::KEY::POSITION, sf::Vector2f(20.f, 70.f)},
+        {fr::KEY::SIZE, sf::Vector2f(280.f, 24.f)},
+    }, FRSGUI);
 }
+
+
+/* Main game scene */
+void Game::createGameScene(fr::FRSGUI &FRSGUI)
+{
+    const auto game_data_block = fr::UIElement::Builder(&FRSGUI)
+    .setID("game_data_block")
+    .addGroups( {"off_scene", "game_data_block_main"})
+    .buildUIElement();
+
+    const auto game_data_player_name = fr::UIElement::Builder(&FRSGUI)
+    .setID("game_data_player_name")
+    .addGroups( { "game_data_data_main", "off_scene"})
+    .setText("Player name: "+player.player_name)
+    .buildUIElement();
+}
+
+void Game::showGameScene(fr::FRSGUI &FRSGUI)
+{
+    //FRSGUI.getUIElementByID("game_data_block")->deleteGroup("off_scene");
+    FRSGUI.getUIElementByID("game_data_player_name")->deleteGroup("off_scene");
+}
+
 
 void Game::createStartScene(fr::FRSGUI &FRSGUI)
 {
@@ -123,9 +167,11 @@ void Game::createCharacterCreationScene(fr::FRSGUI &FRSGUI)
         std::cout << this->player.player_name << std::endl;
 
         hideCharacterCreationScene(FRSGUI);
+
+        createGameScene(FRSGUI);
+        showGameScene(FRSGUI);
     });
 }
-
 
 
 void Game::showStartScene(fr::FRSGUI &FRSGUI)
@@ -150,6 +196,7 @@ void Game::hideCharacterCreationScene(fr::FRSGUI &FRSGUI)
     FRSGUI.getInputByID("name_input_field")->addGroup("off_scene");
     FRSGUI.getButtonByID("confirm_button")->addGroup("off_scene");
 }
+
 
 
 
